@@ -214,7 +214,7 @@ def load_save():
 
 ## Inventory functions
 inventory_window = None 
-def OpenInventoryButton():
+def open_inventory_button():
     global inventory_window, root
     inventory_items = sql_conn.execute_select(extract_query('uspSelectInventoryItemsAll'))
 
@@ -223,18 +223,18 @@ def OpenInventoryButton():
         tmp_inventory = Inventory(item[0], item[1], int(item[2]), item[3])
         inventory_class_objects.append(tmp_inventory)
     
-    OpenInventoryWindow(inventory_class_objects)
+    open_inventory_window(inventory_class_objects)
     
-def OpenInventoryWindow(items):
+def open_inventory_window(items):
     global inventory_window, root 
     inventory_window = InventoryWindow(root)
-    inventory_window.add_insert_inventory_callback(AddNewInventoryItem)
+    inventory_window.add_insert_inventory_callback(add_new_inventory_item)
     inventory_window.init_window(items)
 
-def AddNewInventoryItem(itemName, itemQuantity):
+def add_new_inventory_item(item_name, item_quantity):
     global inventory_window
-    tmpInv = Inventory(name = itemName, quantity = itemQuantity, exists = False)
-    inventory_window.create_ui_instances([tmpInv])
+    tmp_inv = Inventory(name = item_name, quantity = item_quantity, exists = False)
+    inventory_window.create_ui_instances([tmp_inv])
 
 ### UI
 # Initialise UI window
@@ -283,7 +283,7 @@ save_button = tk.Button(new_npc_frame, text='Save NPCs to File', command=create_
 load_button = tk.Button(new_npc_frame, text='Load NPCs from File', command=load_save)
 
 # Define Inventory button
-open_inventory_button = tk.Button(new_npc_frame, text = 'Open Inventory', command = OpenInventoryButton)
+open_inventory_button = tk.Button(new_npc_frame, text = 'Open Inventory', command = open_inventory_button)
 
 # Initialise GoldUI
 gold_interface.update_master(new_npc_frame)
