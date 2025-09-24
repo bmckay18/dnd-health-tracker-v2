@@ -1,22 +1,21 @@
 [MASTER]
-ignore=tests
+# No other files/folders ignored
+ignore=
 
 [MESSAGES CONTROL]
-enable=all
+# Disable all messages except naming conventions
+disable=all
+enable=C0103,W0611
 
 [BASIC]
-# Naming styles
+# Naming conventions
 class-naming-style=PascalCase
 function-naming-style=snake_case
+method-naming-style=snake_case
 variable-naming-style=snake_case
-const-naming-style=UPPER_CASE
 attr-naming-style=snake_case
+const-naming-style=UPPER_CASE
 argument-naming-style=snake_case
-method-naming-style=snake_case  # methods in classes
-# Allow leading underscore for “private” names
-
-[FORMAT]
-max-line-length=120
 
 [REPORTS]
 output-format=colorized
