@@ -12,49 +12,49 @@ class InventoryUI():
     
     def create_ui_widgets(self):
         # Create widgets
-        self.nameLabel = tk.Label(self.root, text = self.item.name)
-        self.quantityEntry = tk.Entry(self.root)
-        self.quantityEntry.insert(0, str(self.item.quantity))
-        self.noteButton = tk.Button(self.root, text = 'Description', command = self.create_note_modal)
+        self.name_label = tk.Label(self.root, text = self.item.name)
+        self.quantity_entry = tk.Entry(self.root)
+        self.quantity_entry.insert(0, str(self.item.quantity))
+        self.note_button = tk.Button(self.root, text = 'Description', command = self.create_note_modal)
     
     def create_note_modal(self):
         # Create window
-        self.noteModalWindow = tk.Toplevel(self.root)
-        self.noteModalWindow.title("Item Note")
-        self.noteModalWindow.lift()
-        self.noteModalWindow.focus_force()
+        self.note_modal_window = tk.Toplevel(self.root)
+        self.note_modal_window.title("Item Note")
+        self.note_modal_window.lift()
+        self.note_modal_window.focus_force()
 
         # Create widgets
-        self.noteText = tk.Text(self.noteModalWindow, width = 80, height = 5)
-        self.noteSaveButton = tk.Button(self.noteModalWindow, text = 'Update Note', command = self._update_note)
+        self.note_text = tk.Text(self.note_modal_window, width = 80, height = 5)
+        self.note_save_button = tk.Button(self.note_modal_window, text = 'Update Note', command = self._update_note)
 
         # Place widgets
-        self.noteText.grid(row = 1, column = 1, pady = 5, padx = 5)
-        self.noteSaveButton.grid(row = 2, column = 1, pady = 5)
+        self.note_text.grid(row = 1, column = 1, pady = 5, padx = 5)
+        self.note_save_button.grid(row = 2, column = 1, pady = 5)
 
         # Update text
-        self.noteText.insert("1.0", self.item.note)
+        self.note_text.insert("1.0", self.item.note)
     
     def _update_note(self):
-        self.item.note = self.noteText.get("1.0", tk.END)
-        self.noteModalWindow.destroy()
+        self.item.note = self.note_text.get("1.0", tk.END)
+        self.note_modal_window.destroy()
     
     def display_widgets(self, UIrow):
         y_pad = 5
         x_pad = 2.5
 
         # Display widgets
-        self.nameLabel.grid(row = UIrow, column = 1, pady = y_pad, padx = x_pad)
-        self.quantityEntry.grid(row = UIrow, column = 2, pady = y_pad, padx = x_pad)
-        self.noteButton.grid(row = UIrow, column = 3, pady = y_pad, padx = x_pad)
+        self.name_label.grid(row = UIrow, column = 1, pady = y_pad, padx = x_pad)
+        self.quantity_entry.grid(row = UIrow, column = 2, pady = y_pad, padx = x_pad)
+        self.note_button.grid(row = UIrow, column = 3, pady = y_pad, padx = x_pad)
     
     def hide_widgets(self):
-        self.nameLabel.grid_forget()
-        self.quantityEntry.grid_forget()
-        self.noteButton.grid_forget()
+        self.name_label.grid_forget()
+        self.quantity_entry.grid_forget()
+        self.note_button.grid_forget()
     
     def update_database(self):
-        self.item.UpdateItem(self.quantityEntry.get())
+        self.item.UpdateItem(self.quantity_entry.get())
     
     def _notify_delete(self):
         for func in self._callback:
