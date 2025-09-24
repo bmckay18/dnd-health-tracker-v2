@@ -37,7 +37,7 @@ class SQLService():
         finally:
             conn.close()
     
-    def ExecuteSelect(self, query): # Used for select queries
+    def execute_select(self, query): # Used for select queries
         conn = s.connect(self.db_filename)
         cursor = conn.cursor()
         try:

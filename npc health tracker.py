@@ -191,7 +191,7 @@ def LoadSave():
 
     try:
         query = extract_query('uspSelectNPCData')
-        content = sql_conn.ExecuteSelect(query)
+        content = sql_conn.execute_select(query)
         # Create new NPC object 
         for data_split in content:
             t_name = data_split[0]
@@ -216,7 +216,7 @@ def LoadSave():
 inventory_window = None 
 def OpenInventoryButton():
     global inventory_window, root
-    inventory_items = sql_conn.ExecuteSelect(extract_query('uspSelectInventoryItemsAll'))
+    inventory_items = sql_conn.execute_select(extract_query('uspSelectInventoryItemsAll'))
 
     inventory_class_objects = []
     for item in inventory_items:

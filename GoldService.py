@@ -12,7 +12,7 @@ class GoldService():
     def _RetrieveAmount(self):
         query = extract_query('uspSelectGoldAmount')
         
-        return self.conn.ExecuteSelect(query)[0][0]
+        return self.conn.execute_select(query)[0][0]
 
     def _UpdateAmount(self, difference):
         query = extract_query('uspUpdateGoldAmount')
