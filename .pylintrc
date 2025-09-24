@@ -1,0 +1,21 @@
+[MASTER]
+# No other files/folders ignored
+ignore=
+
+[MESSAGES CONTROL]
+# Disable all messages except naming conventions
+disable=all
+enable=C0103,W0611
+
+[BASIC]
+# Naming conventions
+class-naming-style=PascalCase
+function-naming-style=snake_case
+method-naming-style=snake_case
+variable-naming-style=snake_case
+attr-naming-style=snake_case
+const-naming-style=UPPER_CASE
+argument-naming-style=snake_case
+
+[REPORTS]
+output-format=colorized
