@@ -68,7 +68,7 @@ class InventoryWindow():
 
     def _update_quantities(self):
         for item in self.item_uis:
-            item.UpdateDatabase()
+            item.update_database()
     
     def place_item_widgets(self):
         page_factor = self.page * self.displayed_items_limit
@@ -76,11 +76,11 @@ class InventoryWindow():
         self.page_label['text'] = f'Page: {self.page + 1}'
 
         for ui in self.item_uis:
-            ui.HideWidgets()
+            ui.hide_widgets()
 
         try:
             for i in range(0,self.displayed_items_limit):
-                self.item_uis[i + page_factor].DisplayWidgets(i)
+                self.item_uis[i + page_factor].display_widgets(i)
         except IndexError as m:
             print(m)
     
