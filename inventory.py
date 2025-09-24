@@ -1,7 +1,7 @@
 # Define libraries
 from sql_service import SQLService
 from config import *
-from functions.ExtractQuery import extract_query
+from functions.extract_query import extract_query
 
 ## Define Inventory class
 class Inventory():

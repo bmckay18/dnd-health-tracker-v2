@@ -2,7 +2,7 @@ import sqlite3 as s
 from config import *
 
 class SQLService():
-    DB_FILE_NAME = db_name
+    DB_FILE_NAME = DB_NAME
 
     def __init__(self):
         self.db_schema = BASE_PATH / "db" / "schema.sql"

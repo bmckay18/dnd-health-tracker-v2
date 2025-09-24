@@ -4,11 +4,11 @@ import tkinter as tk
 from tkinter import messagebox
 from sql_service import SQLService
 from config import *
-from InventoryWindow import InventoryWindow
+from inventory_window import InventoryWindow
 from inventory import Inventory
-from GoldService import GoldService
+from gold_service import GoldService
 from gold_ui import GoldUI
-from functions.ExtractQuery import extract_query
+from functions.extract_query import extract_query
 
 # Establish DB connection
 sql_conn = SQLService()
