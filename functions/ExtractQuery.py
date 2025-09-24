@@ -12,7 +12,7 @@ def extract_query(file_name: str):
     """
 
     file_name += '.sql'
-    with open(usp_path / file_name, 'r') as f:
+    with open(USP_PATH / file_name, 'r') as f:
         content = f.read()
     
     return content 

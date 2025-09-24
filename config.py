@@ -1,13 +1,13 @@
 from pathlib import Path
 
-base_path = Path(__file__).resolve().parent
-usp_path = base_path / "db" / "procedures"
+BASE_PATH = Path(__file__).resolve().parent
+USP_PATH = BASE_PATH / "db" / "procedures"
 
 ## Database Environments
 # healthDB.db = PROD
 # healthDB_DEV.db = DEV
-env_flag = 0 # 0 = dev, 1 = prod
-if env_flag == 0:
-    database_name = 'healthDB_DEV.db'
-elif env_flag == 1:
-    database_name = 'healthDB.db'
+ENV_FLAG = 0 # 0 = dev, 1 = prod
+if ENV_FLAG == 0:
+    db_name = 'healthDB_DEV.db'
+elif ENV_FLAG == 1:
+    db_name = 'healthDB.db'
