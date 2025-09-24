@@ -1,0 +1,2 @@
+SELECT colNPCName, colNPCMaxHP, colNPCHP
+FROM tblNPC
