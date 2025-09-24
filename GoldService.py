@@ -7,7 +7,7 @@ class GoldService():
     def __init__(self):
         self.conn = SQLService()
         self.amount = self._retrieve_amount()
-        self.UICallback = lambda *args, **kwargs: None 
+        self.ui_cb = lambda *args, **kwargs: None 
     
     def _retrieve_amount(self):
         query = extract_query('uspSelectGoldAmount')
@@ -36,7 +36,7 @@ class GoldService():
         self._notify_cb()
     
     def _notify_cb(self):
-        self.UICallback(self.get_amount())
+        self.ui_cb(self.get_amount())
     
     def add_cb(self, func):
-        self.UICallback = func
+        self.ui_cb = func
