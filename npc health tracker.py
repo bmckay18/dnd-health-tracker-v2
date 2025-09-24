@@ -16,8 +16,8 @@ sql_conn.create_db() # Creates the database if it doesn't exist
 # Establish Gold service
 gold = GoldService()
 goldInterface = GoldUI()
-gold.AddCB(goldInterface.update_gold)
-goldInterface.add_logic_cb(gold.UpdateAmount)
+gold.add_cb(goldInterface.update_gold)
+goldInterface.add_logic_cb(gold.update_amount)
 
 # Define NPC class
 class NPC():
@@ -313,7 +313,7 @@ save_button.grid(row=9, column = 1)
 load_button.grid(row=10, column = 1, pady = 5)
 open_inventory_button.grid(row = 11, column = 1)
 goldInterface.place_widgets(12)
-gold._NotifyCB()
+gold._notify_cb()
 
 # Run main loop
 root.mainloop()

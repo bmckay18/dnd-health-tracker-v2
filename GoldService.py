@@ -6,15 +6,15 @@ from functions.ExtractQuery import extract_query
 class GoldService():
     def __init__(self):
         self.conn = SQLService()
-        self.amount = self._RetrieveAmount()
+        self.amount = self._retrieve_amount()
         self.UICallback = lambda *args, **kwargs: None 
     
-    def _RetrieveAmount(self):
+    def _retrieve_amount(self):
         query = extract_query('uspSelectGoldAmount')
         
         return self.conn.execute_select(query)[0][0]
 
-    def _UpdateAmount(self, difference):
+    def _update_amount(self, difference):
         query = extract_query('uspUpdateGoldAmount')
         
         query = query.replace("@amount", str(self.amount))
@@ -22,21 +22,21 @@ class GoldService():
 
         self.conn.execute_update(query)
     
-    def GetAmount(self):
+    def get_amount(self):
         return self.amount
     
-    def UpdateAmount(self, difference):
+    def update_amount(self, difference):
         try:
             difference = int(difference)
         except ValueError as m:
             raise ValueError(m)
         
         self.amount += difference 
-        self._UpdateAmount(difference)
-        self._NotifyCB()
+        self._update_amount(difference)
+        self._notify_cb()
     
-    def _NotifyCB(self):
-        self.UICallback(self.GetAmount())
+    def _notify_cb(self):
+        self.UICallback(self.get_amount())
     
-    def AddCB(self, func):
+    def add_cb(self, func):
         self.UICallback = func
