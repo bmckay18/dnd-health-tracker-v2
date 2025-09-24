@@ -95,7 +95,7 @@ class NPC():
 
 
 # Define functions 
-def AddNewNPC():
+def add_new_npc():
     global name_var, ac_var, hp_var, npc_list, root, quantity_var
 
     if name_var.get() == '' or hp_var.get() == '': # Validation that name and hp were entered
@@ -127,7 +127,7 @@ def AddNewNPC():
     except Exception as m:
         print(m)
 
-    ClearNewFields()
+    clear_new_fields()
 
 def UpdateHealth():
     global npc_list, mass_update_var, allcheck_var, checkbox_selector 
@@ -142,7 +142,7 @@ def UpdateHealth():
     if allcheck_var.get() == 1:
         checkbox_selector.invoke()
 
-def ClearNewFields():
+def clear_new_fields():
     global name_var, hp_var, quantity_var
     name_var.set('')
     hp_var.set('')
@@ -266,8 +266,8 @@ name_entry = tk.Entry(new_npc_frame, textvariable=name_var)
 ac_entry = tk.Entry(new_npc_frame, textvariable=ac_var)
 quantity_entry = tk.Entry(new_npc_frame, textvariable=quantity_var)
 hp_entry = tk.Entry(new_npc_frame, textvariable=hp_var)
-new_button = tk.Button(new_npc_frame, text='Create NPC', command=AddNewNPC)
-clear_button = tk.Button(new_npc_frame, text='Clear Fields', command=ClearNewFields)
+new_button = tk.Button(new_npc_frame, text='Create NPC', command=add_new_npc)
+clear_button = tk.Button(new_npc_frame, text='Clear Fields', command=clear_new_fields)
 checkbox_selector = tk.Checkbutton(new_npc_frame, text='Select all checkboxes', variable=allcheck_var, 
                                    command=SelectCheckboxes)
 mass_update_entry = tk.Entry(new_npc_frame, textvariable=mass_update_var)
