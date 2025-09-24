@@ -16,8 +16,8 @@ sql_conn.create_db() # Creates the database if it doesn't exist
 # Establish Gold service
 gold = GoldService()
 goldInterface = GoldUI()
-gold.AddCB(goldInterface.UpdateGold)
-goldInterface.AddLogicCB(gold.UpdateAmount)
+gold.AddCB(goldInterface.update_gold)
+goldInterface.add_logic_cb(gold.UpdateAmount)
 
 # Define NPC class
 class NPC():
@@ -286,7 +286,7 @@ load_button = tk.Button(new_npc_frame, text='Load NPCs from File', command=LoadS
 open_inventory_button = tk.Button(new_npc_frame, text = 'Open Inventory', command = OpenInventoryButton)
 
 # Initialise GoldUI
-goldInterface.UpdateMaster(new_npc_frame)
+goldInterface.update_master(new_npc_frame)
 
 # Pack label frames
 existing_npc_frame.pack(side='left', fill='both', expand=True)
@@ -312,7 +312,7 @@ mass_delete_button.grid(row = 8, column = 1, pady = 5)
 save_button.grid(row=9, column = 1)
 load_button.grid(row=10, column = 1, pady = 5)
 open_inventory_button.grid(row = 11, column = 1)
-goldInterface.PlaceWidgets(12)
+goldInterface.place_widgets(12)
 gold._NotifyCB()
 
 # Run main loop

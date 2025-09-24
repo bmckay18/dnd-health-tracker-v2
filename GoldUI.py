@@ -8,14 +8,14 @@ class GoldUI():
         self.root = root
         self.logicCB = lambda *args, **kwargs: None
     
-    def UpdateGold(self, amount):
+    def update_gold(self, amount):
         self.goldLabel.config(text = f'Gold: {amount:,}')
     
-    def PlaceWidgets(self, widgetRow):
+    def place_widgets(self, widgetRow):
         # Create widgets
         self.goldLabel = tk.Label(self.root)
         self.goldEntry = tk.Entry(self.root)
-        self.goldButton = tk.Button(self.root, text = 'Update Gold', command = self.UpdateGoldCommand)
+        self.goldButton = tk.Button(self.root, text = 'Update Gold', command = self.update_gold_cmd)
 
         # Place widgets
         self.goldLabel.grid(row = widgetRow, column = 0, padx = 5, pady = 5)
@@ -23,20 +23,20 @@ class GoldUI():
         self.goldButton.grid(row = widgetRow + 1, column = 1, padx = 5)
 
         # Update the label
-        self.UpdateGold(0)
+        self.update_gold(0)
     
-    def UpdateMaster(self, root):
+    def update_master(self, root):
         self.root = root
     
-    def AddLogicCB(self, func):
+    def add_logic_cb(self, func):
         self.logicCB = func 
     
-    def _NotifyLogicCB(self):
+    def _notify_logic_cb(self):
         self.logicCB(self.goldEntry.get())
 
-    def UpdateGoldCommand(self):
+    def update_gold_cmd(self):
         try:
-            self._NotifyLogicCB()
+            self._notify_logic_cb()
             self.goldEntry.delete(0, tk.END) 
         except ValueError as m:
             messagebox.showerror('Error', f'An error occurred: {m}')
