@@ -39,14 +39,14 @@ class InventoryUI():
         self.item.note = self.note_text.get("1.0", tk.END)
         self.note_modal_window.destroy()
     
-    def display_widgets(self, UIrow):
+    def display_widgets(self, ui_row):
         y_pad = 5
         x_pad = 2.5
 
         # Display widgets
-        self.name_label.grid(row = UIrow, column = 1, pady = y_pad, padx = x_pad)
-        self.quantity_entry.grid(row = UIrow, column = 2, pady = y_pad, padx = x_pad)
-        self.note_button.grid(row = UIrow, column = 3, pady = y_pad, padx = x_pad)
+        self.name_label.grid(row = ui_row, column = 1, pady = y_pad, padx = x_pad)
+        self.quantity_entry.grid(row = ui_row, column = 2, pady = y_pad, padx = x_pad)
+        self.note_button.grid(row = ui_row, column = 3, pady = y_pad, padx = x_pad)
     
     def hide_widgets(self):
         self.name_label.grid_forget()
