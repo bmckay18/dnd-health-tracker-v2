@@ -6,8 +6,8 @@ usp_path = base_path / "db" / "procedures"
 ## Database Environments
 # healthDB.db = PROD
 # healthDB_DEV.db = DEV
-envFlag = 0 # 0 = dev, 1 = prod
-if envFlag == 0:
+env_flag = 0 # 0 = dev, 1 = prod
+if env_flag == 0:
     database_name = 'healthDB_DEV.db'
-elif envFlag == 1:
+elif env_flag == 1:
     database_name = 'healthDB.db'
