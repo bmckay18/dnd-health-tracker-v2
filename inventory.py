@@ -91,7 +91,7 @@ class Inventory():
         query = query.replace('@quantity', str(self.quantity))
         query = query.replace('@description', note)
 
-        self.key = self.sql_conn.ExecuteInsert(query, 1)
+        self.key = self.sql_conn.execute_insert(query, 1)
 
         # Update exists flag
         self.exists = True 

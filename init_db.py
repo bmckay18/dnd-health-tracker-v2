@@ -11,7 +11,7 @@ with open(base_path / "db" / "seed.sql") as f:
     seed = f.read()
 
 try:
-    sql_conn.ExecuteInsert(seed)
+    sql_conn.execute_insert(seed)
     print('Database Populated Successfully')
 except Exception as m:
     print('Database Population Failed')

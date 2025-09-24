@@ -178,7 +178,7 @@ def CreateSave():
                 temp_query = temp_query.replace('@currentHP', saveState[2])
                 query += temp_query + '\n'
             
-        sql_conn.ExecuteInsert(query)
+        sql_conn.execute_insert(query)
 
         # Display successful save message to user
         messagebox.showinfo('Success','NPC Data Saved')

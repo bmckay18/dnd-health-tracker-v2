@@ -7,7 +7,7 @@ class SQLService():
     def __init__(self):
         self.db_schema = base_path / "db" / "schema.sql"
 
-    def ExecuteInsert(self, query, returnFlag: int = 0): # Used for insert queries
+    def execute_insert(self, query, returnFlag: int = 0): # Used for insert queries
         conn = s.connect(self.db_filename)
         cursor = conn.cursor()
         try:
