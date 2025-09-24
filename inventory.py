@@ -29,7 +29,7 @@ class Inventory():
         for cb in self._delete_callbacks:
             cb()
     
-    def UpdateItem(self, quantity):
+    def update_item(self, quantity):
         # Convert quantity to int
         try:
             quantity = int(quantity)
@@ -42,14 +42,14 @@ class Inventory():
         # Update the database
         if self.quantity > 0:
             self._notify_update()
-            self._UpdateItemDB()
+            self._update_item_db()
         else:
             self._notify_delete()
-            self.DeleteItem()
+            self.delete_item()
     
-    def _UpdateItemDB(self):
+    def _update_item_db(self):
         if self.exists == False:
-            self.InsertItemDB()
+            self.insert_item_db()
             return 
     
         query = extract_query('uspUpdateInventoryItem')
@@ -65,7 +65,7 @@ class Inventory():
         # Update DB
         self.sql_conn.execute_update(query)
     
-    def DeleteItem(self):
+    def delete_item(self):
         query = extract_query('uspDeleteInventoryItem')
         
         # Replace pk placeholder with key and execute query
@@ -76,7 +76,7 @@ class Inventory():
         self.exists = False
         self._notify_delete()
     
-    def InsertItemDB(self):
+    def insert_item_db(self):
         if self.exists == True: # Prevents insertion of existing items
             return 
 

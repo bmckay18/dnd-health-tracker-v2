@@ -54,7 +54,7 @@ class InventoryUI():
         self.note_button.grid_forget()
     
     def update_database(self):
-        self.item.UpdateItem(self.quantity_entry.get())
+        self.item.update_item(self.quantity_entry.get())
     
     def _notify_delete(self):
         for func in self._callback:
