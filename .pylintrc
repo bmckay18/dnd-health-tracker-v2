@@ -1,0 +1,22 @@
+[MASTER]
+ignore=tests
+
+[MESSAGES CONTROL]
+enable=all
+
+[BASIC]
+# Naming styles
+class-naming-style=PascalCase
+function-naming-style=snake_case
+variable-naming-style=snake_case
+const-naming-style=UPPER_CASE
+attr-naming-style=snake_case
+argument-naming-style=snake_case
+method-naming-style=snake_case  # methods in classes
+# Allow leading underscore for “private” names
+
+[FORMAT]
+max-line-length=120
+
+[REPORTS]
+output-format=colorized
