@@ -129,17 +129,17 @@ def add_new_npc():
 
     clear_new_fields()
 
-def UpdateHealth():
-    global npc_list, mass_update_var, allcheck_var, checkbox_selector 
+def update_health():
+    global npc_list, mass_update_var, all_check_var, checkbox_selector 
     destroy_npcs = []
     for npc in npc_list:
-        npc.HealthCheck()
+        npc.health_check()
         if npc.hp_current == 0:
             destroy_npcs.append(npc)
     
     mass_update_var.set('') # Reset mass update var
 
-    if allcheck_var.get() == 1:
+    if all_check_var.get() == 1:
         checkbox_selector.invoke()
 
 def clear_new_fields():
@@ -149,9 +149,9 @@ def clear_new_fields():
     quantity_var.set('')
 
 def SelectCheckboxes():
-    global allcheck_var, npc_list
+    global all_check_var, npc_list
     for npc in npc_list:
-        npc.checkbool.set(allcheck_var.get())
+        npc.checkbool.set(all_check_var.get())
 
 def DeleteAllNPCs():
     global npc_list
@@ -253,7 +253,7 @@ name_var = tk.StringVar(new_npc_frame)
 ac_var = tk.StringVar(new_npc_frame)
 hp_var = tk.StringVar(new_npc_frame)
 quantity_var = tk.StringVar(new_npc_frame)
-allcheck_var = tk.IntVar(new_npc_frame) # Boolean for the checkbutton that controls all checkbuttons
+all_check_var = tk.IntVar(new_npc_frame) # Boolean for the checkbutton that controls all checkbuttons
 mass_update_var = tk.StringVar(new_npc_frame)
 
 name_label = tk.Label(new_npc_frame, text='NPC Name:')
@@ -268,12 +268,12 @@ quantity_entry = tk.Entry(new_npc_frame, textvariable=quantity_var)
 hp_entry = tk.Entry(new_npc_frame, textvariable=hp_var)
 new_button = tk.Button(new_npc_frame, text='Create NPC', command=add_new_npc)
 clear_button = tk.Button(new_npc_frame, text='Clear Fields', command=clear_new_fields)
-checkbox_selector = tk.Checkbutton(new_npc_frame, text='Select all checkboxes', variable=allcheck_var, 
+checkbox_selector = tk.Checkbutton(new_npc_frame, text='Select all checkboxes', variable=all_check_var, 
                                    command=SelectCheckboxes)
 mass_update_entry = tk.Entry(new_npc_frame, textvariable=mass_update_var)
 
 # Define health update button
-health_update_button = tk.Button(new_npc_frame, text='Update HP', command=UpdateHealth)
+health_update_button = tk.Button(new_npc_frame, text='Update HP', command=update_health)
 
 # Define delete all npcs
 mass_delete_button = tk.Button(new_npc_frame, command=DeleteAllNPCs, text='Delete all NPCs')
