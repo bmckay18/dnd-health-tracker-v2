@@ -161,7 +161,7 @@ def delete_all_npcs():
     npc_list = []
 
 ### Save Functions
-def CreateSave():
+def create_save():
     global npc_list, sql_conn
 
     try:
@@ -169,13 +169,13 @@ def CreateSave():
         base_query = extract_query('uspInsertNPCData')
         query = 'DELETE FROM tblNPC;\n'
         for npc in npc_list:
-            saveState = npc.SaveState()
-            if saveState == -1:
+            save_state = npc.save_state()
+            if save_state == -1:
                 continue
             else:
-                temp_query = base_query.replace('@name', saveState[0])
-                temp_query = temp_query.replace('@maxHP', saveState[1])
-                temp_query = temp_query.replace('@currentHP', saveState[2])
+                temp_query = base_query.replace('@name', save_state[0])
+                temp_query = temp_query.replace('@maxHP', save_state[1])
+                temp_query = temp_query.replace('@currentHP', save_state[2])
                 query += temp_query + '\n'
             
         sql_conn.execute_insert(query)
@@ -186,7 +186,7 @@ def CreateSave():
         print(m)
         messagebox.showerror('Failed',f'NPC data failed to saved. Error: {m}')
 
-def LoadSave():
+def load_save():
     global npc_list
 
     try:
@@ -279,8 +279,8 @@ health_update_button = tk.Button(new_npc_frame, text='Update HP', command=update
 mass_delete_button = tk.Button(new_npc_frame, command=delete_all_npcs, text='Delete all NPCs')
 
 # Define save and load buttons
-save_button = tk.Button(new_npc_frame, text='Save NPCs to File', command=CreateSave)
-load_button = tk.Button(new_npc_frame, text='Load NPCs from File', command=LoadSave)
+save_button = tk.Button(new_npc_frame, text='Save NPCs to File', command=create_save)
+load_button = tk.Button(new_npc_frame, text='Load NPCs from File', command=load_save)
 
 # Define Inventory button
 open_inventory_button = tk.Button(new_npc_frame, text = 'Open Inventory', command = OpenInventoryButton)
