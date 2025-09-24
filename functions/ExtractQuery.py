@@ -1,6 +1,6 @@
 from config import *
 
-def ExtractQuery(filename: str):
+def extract_query(file_name: str):
     """
     Extracts the query from a usp file.
 
@@ -11,8 +11,8 @@ def ExtractQuery(filename: str):
         str: the query from the file
     """
 
-    filename += '.sql'
-    with open(usp_path / filename, 'r') as f:
+    file_name += '.sql'
+    with open(USP_PATH / file_name, 'r') as f:
         content = f.read()
     
     return content 

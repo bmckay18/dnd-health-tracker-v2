@@ -2,19 +2,19 @@ import sqlite3 as s
 from config import *
 
 class SQLService():
-    db_filename = database_name
+    DB_FILE_NAME = db_name
 
     def __init__(self):
-        self.db_schema = base_path / "db" / "schema.sql"
+        self.db_schema = BASE_PATH / "db" / "schema.sql"
 
-    def ExecuteInsert(self, query, returnFlag: int = 0): # Used for insert queries
-        conn = s.connect(self.db_filename)
+    def execute_insert(self, query, return_flag: int = 0): # Used for insert queries
+        conn = s.connect(self.DB_FILE_NAME)
         cursor = conn.cursor()
         try:
-            if returnFlag == 0:
+            if return_flag == 0:
                 cursor.executescript(query)
                 conn.commit()
-            elif returnFlag == 1:
+            elif return_flag == 1:
                 cursor.execute(query)
                 last_id = cursor.lastrowid
                 conn.commit()
@@ -25,8 +25,8 @@ class SQLService():
         finally:
             conn.close()
     
-    def ExecuteUpdate(self, query): # Used for update queries
-        conn = s.connect(self.db_filename)
+    def execute_update(self, query): # Used for update queries
+        conn = s.connect(self.DB_FILE_NAME)
         cursor = conn.cursor()
         try:
             cursor.executescript(query)
@@ -37,8 +37,8 @@ class SQLService():
         finally:
             conn.close()
     
-    def ExecuteSelect(self, query): # Used for select queries
-        conn = s.connect(self.db_filename)
+    def execute_select(self, query): # Used for select queries
+        conn = s.connect(self.DB_FILE_NAME)
         cursor = conn.cursor()
         try:
             cursor.execute(query)
@@ -49,7 +49,7 @@ class SQLService():
         finally:
             conn.close()
     
-    def CreateDB(self):
-        with s.connect(self.db_filename) as conn:
+    def create_db(self):
+        with s.connect(self.DB_FILE_NAME) as conn:
             with open(self.db_schema, 'r') as f:
                 conn.executescript(f.read())
