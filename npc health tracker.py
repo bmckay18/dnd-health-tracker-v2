@@ -148,15 +148,15 @@ def clear_new_fields():
     hp_var.set('')
     quantity_var.set('')
 
-def SelectCheckboxes():
+def select_checkboxes():
     global all_check_var, npc_list
     for npc in npc_list:
-        npc.checkbool.set(all_check_var.get())
+        npc.check_bool.set(all_check_var.get())
 
-def DeleteAllNPCs():
+def delete_all_npcs():
     global npc_list
     for npc in npc_list:
-        npc.Destruct()
+        npc.destruct()
     
     npc_list = []
 
@@ -269,14 +269,14 @@ hp_entry = tk.Entry(new_npc_frame, textvariable=hp_var)
 new_button = tk.Button(new_npc_frame, text='Create NPC', command=add_new_npc)
 clear_button = tk.Button(new_npc_frame, text='Clear Fields', command=clear_new_fields)
 checkbox_selector = tk.Checkbutton(new_npc_frame, text='Select all checkboxes', variable=all_check_var, 
-                                   command=SelectCheckboxes)
+                                   command=select_checkboxes)
 mass_update_entry = tk.Entry(new_npc_frame, textvariable=mass_update_var)
 
 # Define health update button
 health_update_button = tk.Button(new_npc_frame, text='Update HP', command=update_health)
 
 # Define delete all npcs
-mass_delete_button = tk.Button(new_npc_frame, command=DeleteAllNPCs, text='Delete all NPCs')
+mass_delete_button = tk.Button(new_npc_frame, command=delete_all_npcs, text='Delete all NPCs')
 
 # Define save and load buttons
 save_button = tk.Button(new_npc_frame, text='Save NPCs to File', command=CreateSave)
