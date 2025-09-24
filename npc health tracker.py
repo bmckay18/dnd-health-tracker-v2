@@ -228,13 +228,13 @@ def OpenInventoryButton():
 def OpenInventoryWindow(items):
     global inventory_window, root 
     inventory_window = InventoryWindow(root)
-    inventory_window.AddInsertInventoryCallback(AddNewInventoryItem)
-    inventory_window.InitialiseWindow(items)
+    inventory_window.add_insert_inventory_callback(AddNewInventoryItem)
+    inventory_window.init_window(items)
 
 def AddNewInventoryItem(itemName, itemQuantity):
     global inventory_window
     tmpInv = Inventory(name = itemName, quantity = itemQuantity, exists = False)
-    inventory_window.CreateUIInstances([tmpInv])
+    inventory_window.create_ui_instances([tmpInv])
 
 ### UI
 # Initialise UI window

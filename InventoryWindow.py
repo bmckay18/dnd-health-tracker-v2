@@ -20,16 +20,16 @@ class InventoryWindow():
         self.displayedItemsLimit = 10 # Number of items to display per page
         self.newInventoryCallback = lambda *args, **kwargs: None
     
-    def CreateUIInstances(self, items: list[Inventory]):
+    def create_ui_instances(self, items: list[Inventory]):
         for item in items:
             self.itemUIs.append(InventoryUI(self.itemFrame, item))
             
-        self.SetMaxPageLimit()
+        self.set_max_page_limit()
     
-    def SetMaxPageLimit(self):
+    def set_max_page_limit(self):
         self.maxPage = m.ceil(len(self.itemUIs) / self.displayedItemsLimit)
     
-    def CreateModalFrames(self):
+    def create_modal_frames(self):
         self.itemFrame = tk.Frame(self.window)
         self.editFrame = tk.Frame(self.window) 
 
@@ -40,12 +40,12 @@ class InventoryWindow():
         self.itemQuantityEntry = tk.Entry(self.editFrame)
         self.itemQuantityLabel = tk.Label(self.editFrame, text = 'Quantity:')
 
-        self.createItemButton = tk.Button(self.editFrame, text = 'Add', command = self._InsertInventoryItem)
+        self.createItemButton = tk.Button(self.editFrame, text = 'Add', command = self._insert_inventory_item)
 
-        self.nextPageButton = tk.Button(self.editFrame, text = '>', command = self.NextPage)
-        self.prevPageButton = tk.Button(self.editFrame, text = '<', command = self.PreviousPage)
+        self.nextPageButton = tk.Button(self.editFrame, text = '>', command = self.next_page)
+        self.prevPageButton = tk.Button(self.editFrame, text = '<', command = self.previous_page)
         self.pageLabel = tk.Label(self.editFrame, text = f'Page: {self.page + 1}')
-        self.updateQuantitiesButton = tk.Button(self.editFrame, text = 'Update Items', command = self._UpdateQuantities)
+        self.updateQuantitiesButton = tk.Button(self.editFrame, text = 'Update Items', command = self._update_quantities)
 
         # Place frames
         self.itemFrame.pack(side='left', fill='both', expand=True)
@@ -66,11 +66,11 @@ class InventoryWindow():
         self.pageLabel.grid(row = 5, column = 2, pady = self.pady * 2)
         self.nextPageButton.grid(row = 5, column = 3, padx = self.padx * 2)
 
-    def _UpdateQuantities(self):
+    def _update_quantities(self):
         for item in self.itemUIs:
             item.UpdateDatabase()
     
-    def PlaceItemWidgets(self):
+    def place_item_widgets(self):
         page_factor = self.page * self.displayedItemsLimit
 
         self.pageLabel['text'] = f'Page: {self.page + 1}'
@@ -84,32 +84,32 @@ class InventoryWindow():
         except IndexError as m:
             print(m)
     
-    def InitialiseWindow(self, items: Inventory):
-        self.CreateModalFrames()
-        self.CreateUIInstances(items)
-        self.PlaceItemWidgets()
+    def init_window(self, items: Inventory):
+        self.create_modal_frames()
+        self.create_ui_instances(items)
+        self.place_item_widgets()
     
-    def PreviousPage(self):
+    def previous_page(self):
         if self.page > 0:
             self.page -= 1
-            self.PlaceItemWidgets()
+            self.place_item_widgets()
     
-    def NextPage(self):
+    def next_page(self):
         if self.page + 1 != self.maxPage:
             self.page += 1
-            self.PlaceItemWidgets()
+            self.place_item_widgets()
     
-    def _InsertInventoryItem(self):
+    def _insert_inventory_item(self):
         name = self.itemNameEntry.get()
         try:
             quantity = int(self.itemQuantityEntry.get())
             self.newInventoryCallback(name, quantity)
-            self.PlaceItemWidgets()
+            self.place_item_widgets()
         except ValueError as m:
             messagebox.showerror("Error", f'An error occurred: {m}')
         finally:
             self.itemNameEntry.delete(0, tk.END)
             self.itemQuantityEntry.delete(0, tk.END)
     
-    def AddInsertInventoryCallback(self, func):
+    def add_insert_inventory_callback(self, func):
         self.newInventoryCallback = func
