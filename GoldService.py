@@ -1,7 +1,7 @@
 # Define libraries
 from sqlService import SQLService
 from config import *
-from functions.ExtractQuery import ExtractQuery
+from functions.ExtractQuery import extract_query
 
 class GoldService():
     def __init__(self):
@@ -10,12 +10,12 @@ class GoldService():
         self.UICallback = lambda *args, **kwargs: None 
     
     def _RetrieveAmount(self):
-        query = ExtractQuery('uspSelectGoldAmount')
+        query = extract_query('uspSelectGoldAmount')
         
         return self.conn.ExecuteSelect(query)[0][0]
 
     def _UpdateAmount(self, difference):
-        query = ExtractQuery('uspUpdateGoldAmount')
+        query = extract_query('uspUpdateGoldAmount')
         
         query = query.replace("@amount", str(self.amount))
         query = query.replace("@difference", str(difference))

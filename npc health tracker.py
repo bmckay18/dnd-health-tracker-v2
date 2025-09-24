@@ -7,7 +7,7 @@ from InventoryWindow import InventoryWindow
 from inventory import Inventory
 from GoldService import GoldService
 from GoldUI import GoldUI
-from functions.ExtractQuery import ExtractQuery
+from functions.ExtractQuery import extract_query
 
 # Establish DB connection
 sql_conn = SQLService()
@@ -166,7 +166,7 @@ def CreateSave():
 
     try:
         # Retrieve insert usp
-        base_query = ExtractQuery('uspInsertNPCData')
+        base_query = extract_query('uspInsertNPCData')
         query = 'DELETE FROM tblNPC;\n'
         for npc in npc_list:
             saveState = npc.SaveState()
@@ -190,7 +190,7 @@ def LoadSave():
     global npc_list
 
     try:
-        query = ExtractQuery('uspSelectNPCData')
+        query = extract_query('uspSelectNPCData')
         content = sql_conn.ExecuteSelect(query)
         # Create new NPC object 
         for data_split in content:
@@ -216,7 +216,7 @@ def LoadSave():
 inventory_window = None 
 def OpenInventoryButton():
     global inventory_window, root
-    inventory_items = sql_conn.ExecuteSelect(ExtractQuery('uspSelectInventoryItemsAll'))
+    inventory_items = sql_conn.ExecuteSelect(extract_query('uspSelectInventoryItemsAll'))
 
     inventory_class_objects = []
     for item in inventory_items:

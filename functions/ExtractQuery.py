@@ -1,6 +1,6 @@
 from config import *
 
-def ExtractQuery(filename: str):
+def extract_query(filename: str):
     """
     Extracts the query from a usp file.
 

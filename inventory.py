@@ -1,7 +1,7 @@
 # Define libraries
 from sqlService import SQLService
 from config import *
-from functions.ExtractQuery import ExtractQuery
+from functions.ExtractQuery import extract_query
 
 ## Define Inventory class
 class Inventory():
@@ -52,7 +52,7 @@ class Inventory():
             self.InsertItemDB()
             return 
     
-        query = ExtractQuery('uspUpdateInventoryItem')
+        query = extract_query('uspUpdateInventoryItem')
         
         # Replace placeholders        
         query = query.replace('@primarykey', str(self.key))
@@ -66,7 +66,7 @@ class Inventory():
         self.sql_conn.ExecuteUpdate(query)
     
     def DeleteItem(self):
-        query = ExtractQuery('uspDeleteInventoryItem')
+        query = extract_query('uspDeleteInventoryItem')
         
         # Replace pk placeholder with key and execute query
         query = query.replace("@primarykey", str(self.key))
@@ -80,7 +80,7 @@ class Inventory():
         if self.exists == True: # Prevents insertion of existing items
             return 
 
-        query = ExtractQuery('uspInsertInventoryItem')
+        query = extract_query('uspInsertInventoryItem')
         
         # Sanitise query 
         name = self.name.replace("'","''")
