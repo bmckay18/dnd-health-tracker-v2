@@ -1,5 +1,5 @@
 # Define libraries
-from sqlService import SQLService
+from sql_service import SQLService
 from config import *
 from functions.ExtractQuery import extract_query
 

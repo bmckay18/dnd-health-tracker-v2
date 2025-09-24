@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import messagebox
 from config import *
 from inventory import Inventory
-from inventoryUI import InventoryUI
+from inventory_ui import InventoryUI
 import math as m
 
 class InventoryWindow():
