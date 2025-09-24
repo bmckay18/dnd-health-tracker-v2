@@ -1,4 +1,4 @@
-import sqlService as s
+import sql_service as s
 from config import *
 
 sql_conn = s.SQLService()
