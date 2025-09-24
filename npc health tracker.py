@@ -15,9 +15,9 @@ sql_conn.create_db() # Creates the database if it doesn't exist
 
 # Establish Gold service
 gold = GoldService()
-goldInterface = GoldUI()
-gold.add_cb(goldInterface.update_gold)
-goldInterface.add_logic_cb(gold.update_amount)
+gold_interface = GoldUI()
+gold.add_cb(gold_interface.update_gold)
+gold_interface.add_logic_cb(gold.update_amount)
 
 # Define NPC class
 class NPC():
@@ -26,58 +26,58 @@ class NPC():
         self.hp_current = hp_max
         self.ac = ac 
         self.name = name
-        self.labelWidget = tk.Label(master_win, text=f'{self.name} : {self.hp_current} HP')
-        self.widgetStringVar = tk.StringVar(master_win)
-        self.entryWidget = tk.Entry(master_win, textvariable=self.widgetStringVar)
-        self.buttonWidget = tk.Button(master_win, text='Remove') # Need to add command to this
-        self.checkbool = tk.IntVar(master_win)
-        self.checkwidget = tk.Checkbutton(master_win, variable=self.checkbool)
-        self.isDead = False
+        self.label_widget = tk.Label(master_win, text=f'{self.name} : {self.hp_current} HP')
+        self.widget_string_var = tk.StringVar(master_win)
+        self.entry_widget = tk.Entry(master_win, textvariable=self.widget_string_var)
+        self.button_widget = tk.Button(master_win, text='Remove') # Need to add command to this
+        self.check_bool = tk.IntVar(master_win)
+        self.check_widget = tk.Checkbutton(master_win, variable=self.check_bool)
+        self.is_dead = False
     
-    def SaveState(self):
-        if self.hp_current > 0 and self.isDead == False:
+    def save_state(self):
+        if self.hp_current > 0 and self.is_dead == False:
             return [self.name, str(self.hp_max), str(self.hp_current)]
         else:
             return -1
     
-    def ModifyHP(self, amount):
-        if self.isDead == False: # Prevent dead npcs from regaining life
+    def modify_hp(self, amount):
+        if self.is_dead == False: # Prevent dead npcs from regaining life
             self.hp_current += amount
         
         if self.hp_current > self.hp_max:
             self.hp_current = self.hp_max
         elif self.hp_current <= 0:
             self.hp_current = 0
-            self.DisableNPC()
-            self.isDead = True
+            self.disable_npc()
+            self.is_dead = True
         
-        self.UpdateLabel()
-        self.checkbool.set(0)
+        self.update_label()
+        self.check_bool.set(0)
     
-    def Destruct(self): # Unused
-        self.buttonWidget.destroy()
-        self.labelWidget.destroy()
-        self.entryWidget.destroy()
-        self.checkwidget.destroy()
+    def destruct(self): # Unused
+        self.button_widget.destroy()
+        self.label_widget.destroy()
+        self.entry_widget.destroy()
+        self.check_widget.destroy()
     
-    def DisableNPC(self):
-        self.entryWidget['state'] = 'disabled'
-        self.checkwidget['state'] = 'disabled'
-        self.checkbool.set(0)
+    def disable_npc(self):
+        self.entry_widget['state'] = 'disabled'
+        self.check_widget['state'] = 'disabled'
+        self.check_bool.set(0)
 
-    def PackWidgets(self, position, npc_column=0):
+    def pack_widgets(self, position, npc_column=0):
         npc_column *= 3 # This variable controls if the widgets should be place in column 0,1,2
-        self.entryWidget.grid(row=position, column=1 + npc_column, pady = 3)
-        self.labelWidget.grid(row=position, column=0 + npc_column)
-        self.checkwidget.grid(row=position, column = 2 + npc_column)
+        self.entry_widget.grid(row=position, column=1 + npc_column, pady = 3)
+        self.label_widget.grid(row=position, column=0 + npc_column)
+        self.check_widget.grid(row=position, column = 2 + npc_column)
     
-    def UpdateLabel(self):
-        self.labelWidget['text'] = f'{self.name} : {self.hp_current} HP'
+    def update_label(self):
+        self.label_widget['text'] = f'{self.name} : {self.hp_current} HP'
     
-    def HealthCheck(self):
+    def health_check(self):
         global mass_update_var
-        if self.checkbool.get() == 0:
-            temp_hp = self.widgetStringVar.get()
+        if self.check_bool.get() == 0:
+            temp_hp = self.widget_string_var.get()
         else:
             temp_hp = mass_update_var.get()
         
@@ -86,8 +86,8 @@ class NPC():
         
         try: # Try to evaluate temp_hp to int and update hp
             temp_hp = eval(temp_hp)
-            self.ModifyHP(temp_hp)
-            self.widgetStringVar.set('')
+            self.modify_hp(temp_hp)
+            self.widget_string_var.set('')
         except NameError as m:
             print(m)
         except Exception as m:
@@ -117,11 +117,11 @@ def AddNewNPC():
             if len(npc_list) < 23: # Place in first column
                 temp_npc = NPC(f'{name_var.get()} {num_string}', int(hp_var.get()), ac_var.get(), existing_npc_frame)
                 npc_list.append(temp_npc)
-                temp_npc.PackWidgets(len(npc_list)-1, 0)
+                temp_npc.pack_widgets(len(npc_list)-1, 0)
             elif len(npc_list) < 46: # Place in second column
                 temp_npc = NPC(f'{name_var.get()} {num_string}', int(hp_var.get()), ac_var.get(), existing_npc_frame_2)
                 npc_list.append(temp_npc)
-                temp_npc.PackWidgets(len(npc_list)-24, 0)
+                temp_npc.pack_widgets(len(npc_list)-24, 0)
     except ValueError as vm:
         print(vm)
     except Exception as m:
@@ -200,15 +200,15 @@ def LoadSave():
             if len(npc_list) < 23: # Place in first column
                 temp_npc = NPC(f'{t_name}', t_maxHP, ac_var.get(), existing_npc_frame)
                 temp_npc.hp_current = t_currentHP
-                temp_npc.UpdateLabel()
+                temp_npc.update_label()
                 npc_list.append(temp_npc)
-                temp_npc.PackWidgets(len(npc_list)-1, 0)
+                temp_npc.pack_widgets(len(npc_list)-1, 0)
             elif len(npc_list) < 46: # Place in second column
                 temp_npc = NPC(f'{t_name}', t_maxHP, ac_var.get(), existing_npc_frame_2)
                 temp_npc.hp_current = t_currentHP
-                temp_npc.UpdateLabel()
+                temp_npc.update_label()
                 npc_list.append(temp_npc)
-                temp_npc.PackWidgets(len(npc_list)-24, 0)
+                temp_npc.pack_widgets(len(npc_list)-24, 0)
     except Exception as m:
         print(m)
 
@@ -286,7 +286,7 @@ load_button = tk.Button(new_npc_frame, text='Load NPCs from File', command=LoadS
 open_inventory_button = tk.Button(new_npc_frame, text = 'Open Inventory', command = OpenInventoryButton)
 
 # Initialise GoldUI
-goldInterface.update_master(new_npc_frame)
+gold_interface.update_master(new_npc_frame)
 
 # Pack label frames
 existing_npc_frame.pack(side='left', fill='both', expand=True)
@@ -312,7 +312,7 @@ mass_delete_button.grid(row = 8, column = 1, pady = 5)
 save_button.grid(row=9, column = 1)
 load_button.grid(row=10, column = 1, pady = 5)
 open_inventory_button.grid(row = 11, column = 1)
-goldInterface.place_widgets(12)
+gold_interface.place_widgets(12)
 gold._notify_cb()
 
 # Run main loop
