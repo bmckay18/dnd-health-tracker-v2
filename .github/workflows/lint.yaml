@@ -1,9 +1,9 @@
 name: Lint Python Code
 
 on:
-  push:
-    branches: [main]
-  pull_request:
+  pull_requests:
+    branches:
+      - main
 
 jobs:
   pylint:
