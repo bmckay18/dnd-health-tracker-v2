@@ -11,7 +11,7 @@ from functions.ExtractQuery import extract_query
 
 # Establish DB connection
 sql_conn = SQLService()
-sql_conn.CreateDB() # Creates the database if it doesn't exist
+sql_conn.create_db() # Creates the database if it doesn't exist
 
 # Establish Gold service
 gold = GoldService()

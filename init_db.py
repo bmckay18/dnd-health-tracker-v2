@@ -4,7 +4,7 @@ from pathlib import Path
 base_path = Path(__file__).resolve().parent
 sql_conn = s.SQLService()
 
-sql_conn.CreateDB() # Create the DB
+sql_conn.create_db() # Create the DB
 
 # Extract seed schema
 with open(base_path / "db" / "seed.sql") as f:

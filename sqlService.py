@@ -49,7 +49,7 @@ class SQLService():
         finally:
             conn.close()
     
-    def CreateDB(self):
+    def create_db(self):
         with s.connect(self.db_filename) as conn:
             with open(self.db_schema, 'r') as f:
                 conn.executescript(f.read())
