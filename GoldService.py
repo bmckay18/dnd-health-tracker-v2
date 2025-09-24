@@ -20,7 +20,7 @@ class GoldService():
         query = query.replace("@amount", str(self.amount))
         query = query.replace("@difference", str(difference))
 
-        self.conn.ExecuteUpdate(query)
+        self.conn.execute_update(query)
     
     def GetAmount(self):
         return self.amount

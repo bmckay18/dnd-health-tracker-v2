@@ -63,14 +63,14 @@ class Inventory():
             query = query.replace("'@note'", 'NULL')
 
         # Update DB
-        self.sql_conn.ExecuteUpdate(query)
+        self.sql_conn.execute_update(query)
     
     def DeleteItem(self):
         query = extract_query('uspDeleteInventoryItem')
         
         # Replace pk placeholder with key and execute query
         query = query.replace("@primarykey", str(self.key))
-        self.sql_conn.ExecuteUpdate(query)
+        self.sql_conn.execute_update(query)
 
         # Update exists flag
         self.exists = False

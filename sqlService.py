@@ -25,7 +25,7 @@ class SQLService():
         finally:
             conn.close()
     
-    def ExecuteUpdate(self, query): # Used for update queries
+    def execute_update(self, query): # Used for update queries
         conn = s.connect(self.db_filename)
         cursor = conn.cursor()
         try:
