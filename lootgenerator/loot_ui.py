@@ -4,8 +4,7 @@ import tkinter as tk
 from tkinter import ttk
 
 # The LootUI class will handle the UI integration into the health tracker UI
-# It will then make a callback to both the LootGen class and the LootWindowUI class
-# to generate the loot and display these results in a new window
+# It will then make a callback to both the LootGen class to generate the loot
 
 class LootUI():
     def __init__(self, master, options: list[str]):
@@ -15,6 +14,7 @@ class LootUI():
         self.combo_box = None 
         self.amount_entry = None 
         self.gen_button = None 
+        self.logic_cb = lambda *args, **kwargs: None
     
     def place_widgets(self, row):
         # Create combo menu widget
@@ -28,9 +28,15 @@ class LootUI():
         self.amount_entry = tk.Entry(self.root)
 
         # Create button to generate loot
-        self.gen_button = tk.Button(self.root, text = 'Generate Loot', command = None)
+        self.gen_button = tk.Button(self.root, text = 'Generate Loot', command = self._generate_loot)
 
         # Pack widgets into UI window
         self.combo_box.grid(row = row, column = 0, pady = 5)
         self.amount_entry.grid(row = row, column = 1, padx = 5)
         self.gen_button.grid(row = row + 1, column = 1, pady = 5)
+    
+    def _generate_loot(self):
+        self.logic_cb(self.combo_selected.get(), self.amount_entry.get())
+    
+    def add_logic_cb(self, func):
+        self.logic_cb = func
