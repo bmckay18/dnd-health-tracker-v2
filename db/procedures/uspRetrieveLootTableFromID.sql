@@ -1,3 +1,3 @@
-SELECT colMagicItemLootLowerLimit, colMagicItemLootUpperLimit, colMagicItemLootItem
+SELECT colMagicItemLootUpperLimit, colMagicItemLootItem
 FROM tblMagicItemLoot
 WHERE colMagicItemLootTable = %d
