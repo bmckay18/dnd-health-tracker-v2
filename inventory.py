@@ -1,7 +1,7 @@
 # Define libraries
-from sqlService import SQLService
+from sql_service import SQLService
 from config import *
-from functions.ExtractQuery import ExtractQuery
+from functions.extract_query import extract_query
 
 ## Define Inventory class
 class Inventory():
@@ -29,7 +29,7 @@ class Inventory():
         for cb in self._delete_callbacks:
             cb()
     
-    def UpdateItem(self, quantity):
+    def update_item(self, quantity):
         # Convert quantity to int
         try:
             quantity = int(quantity)
@@ -42,17 +42,17 @@ class Inventory():
         # Update the database
         if self.quantity > 0:
             self._notify_update()
-            self._UpdateItemDB()
+            self._update_item_db()
         else:
             self._notify_delete()
-            self.DeleteItem()
+            self.delete_item()
     
-    def _UpdateItemDB(self):
+    def _update_item_db(self):
         if self.exists == False:
-            self.InsertItemDB()
+            self.insert_item_db()
             return 
     
-        query = ExtractQuery('uspUpdateInventoryItem')
+        query = extract_query('uspUpdateInventoryItem')
         
         # Replace placeholders        
         query = query.replace('@primarykey', str(self.key))
@@ -63,24 +63,24 @@ class Inventory():
             query = query.replace("'@note'", 'NULL')
 
         # Update DB
-        self.sql_conn.ExecuteUpdate(query)
+        self.sql_conn.execute_update(query)
     
-    def DeleteItem(self):
-        query = ExtractQuery('uspDeleteInventoryItem')
+    def delete_item(self):
+        query = extract_query('uspDeleteInventoryItem')
         
         # Replace pk placeholder with key and execute query
         query = query.replace("@primarykey", str(self.key))
-        self.sql_conn.ExecuteUpdate(query)
+        self.sql_conn.execute_update(query)
 
         # Update exists flag
         self.exists = False
         self._notify_delete()
     
-    def InsertItemDB(self):
+    def insert_item_db(self):
         if self.exists == True: # Prevents insertion of existing items
             return 
 
-        query = ExtractQuery('uspInsertInventoryItem')
+        query = extract_query('uspInsertInventoryItem')
         
         # Sanitise query 
         name = self.name.replace("'","''")
@@ -91,7 +91,7 @@ class Inventory():
         query = query.replace('@quantity', str(self.quantity))
         query = query.replace('@description', note)
 
-        self.key = self.sql_conn.ExecuteInsert(query, 1)
+        self.key = self.sql_conn.execute_insert(query, 1)
 
         # Update exists flag
         self.exists = True 

@@ -25,6 +25,10 @@ VALUES
 ('Potion of Hill Giant Strength', 2, NULL),
 ('Elixir of Vitality', 1, NULL);
 
-INSERT INTO tblGold (colGoldAmount)
+INSERT INTO tblGold (colGoldAmount, colGoldDifference)
 VALUES 
-(1832);
+(1832, 1832),
+(1932, 100),
+(1000, -932),
+(-500, -1500),
+(150, 650);
