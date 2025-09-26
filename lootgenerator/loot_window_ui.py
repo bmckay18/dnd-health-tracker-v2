@@ -1,6 +1,6 @@
 # Define libraries
 from config import *
-from tkinter import *
+import tkinter as tk
 
 class LootWindowUI():
     def __init__(self):
