@@ -20,7 +20,8 @@ class LootUI():
         # Create combo menu widget
         self.combo_selected = tk.StringVar(self.root)
         self.combo_box = ttk.Combobox(self.root, textvariable=self.combo_selected,
-                                      values = self.options, state = 'readonly')
+                                      values = self.options, state = 'readonly',
+                                      width = 5)
         self.combo_box.current(0)
 
         # Create amount entry widget
