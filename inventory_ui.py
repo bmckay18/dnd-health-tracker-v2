@@ -1,6 +1,5 @@
 # Define libraries
 import tkinter as tk
-from config import *
 from inventory import Inventory
 
 class InventoryUI():
