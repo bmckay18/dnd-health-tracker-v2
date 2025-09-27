@@ -5,7 +5,7 @@ class SQLService():
     DB_FILE_NAME = DB_NAME
 
     def __init__(self):
-        self.db_schema = BASE_PATH / "db" / "schema.sql"
+        self.db_schema = BASE_PATH / "db" / "tables"
 
     def execute_insert(self, query, return_flag: int = 0): # Used for insert queries
         conn = s.connect(self.DB_FILE_NAME)
@@ -50,6 +50,8 @@ class SQLService():
             conn.close()
     
     def create_db(self):
+        tables = sorted(self.db_schema.glob("*.sql"))
         with s.connect(self.DB_FILE_NAME) as conn:
-            with open(self.db_schema, 'r') as f:
-                conn.executescript(f.read())
+            for f in tables:
+                query = f.read_text()
+                conn.executescript(query)
