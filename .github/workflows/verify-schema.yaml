@@ -16,6 +16,11 @@ jobs:
       - name: Install SQLite
         run: sudo apt-get install -y sqlite3
 
-      - name: Test schema
+      - name: Build Database
         run: |
-          sqlite3 :memory: < db/schema.sql
+          DB_FILE=db/my_database.db
+          mkdir -p db
+          rm -f $DB_FILE
+          for f in db/tables/*.sql; do
+            sqlite3 $DB_FILE < "$f"
+          done
