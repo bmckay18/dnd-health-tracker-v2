@@ -5,7 +5,7 @@ ignore=
 [MESSAGES CONTROL]
 # Disable all messages except naming conventions
 disable=all
-enable=C0103,W0611
+enable=C0103,W0611,W0401
 
 [BASIC]
 # Naming conventions
