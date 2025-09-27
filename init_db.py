@@ -1,5 +1,5 @@
 import sql_service as s
-from config import *
+from config import BASE_PATH
 
 sql_conn = s.SQLService()
 sql_conn.create_db() # Create the DB
