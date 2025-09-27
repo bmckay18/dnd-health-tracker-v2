@@ -1,6 +1,5 @@
 # Define libraries
 from sql_service import SQLService
-from config import *
 from functions.extract_query import extract_query
 
 class GoldService():

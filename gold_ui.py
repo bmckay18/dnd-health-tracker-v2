@@ -1,7 +1,6 @@
 # Define libraries
 import tkinter as tk
 from tkinter import messagebox
-from config import *
 
 class GoldUI():
     def __init__(self, root = None):

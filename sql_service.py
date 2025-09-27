@@ -1,5 +1,5 @@
 import sqlite3 as s
-from config import *
+from config import BASE_PATH, DB_NAME
 
 class SQLService():
     DB_FILE_NAME = DB_NAME

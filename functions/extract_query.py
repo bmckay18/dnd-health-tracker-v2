@@ -1,4 +1,4 @@
-from config import *
+from config import USP_PATH
 
 def extract_query(file_name: str):
     """
