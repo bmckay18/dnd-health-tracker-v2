@@ -1,5 +1,4 @@
 # Define libraries
-from config import *
 from sql_service import SQLService
 from functions.extract_query import extract_query
 import random as r
