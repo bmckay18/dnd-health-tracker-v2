@@ -5,16 +5,17 @@ from functions.extract_query import extract_query
 class RoundTracker():
     def __init__(self, ui_cb = lambda *args, **kwargs: None):
         self.conn = SQLService()
-        self.current_round = self._retrieve_round()
+        self.current_round = 0
         self.ui_cb = ui_cb
+        self._retrieve_round()
     
     def _retrieve_round(self):
         query = extract_query("uspRetrieveRound")
         try:
-            return int(self.conn.execute_select(query))
+            self.current_round = self.conn.execute_select(query)
+            self._notify_ui_cb()
         except ValueError as m:
             print(m)
-            return -1
     
     def _notify_ui_cb(self):
         self.ui_cb(self.current_round)
