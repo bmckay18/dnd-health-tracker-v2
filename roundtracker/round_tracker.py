@@ -15,6 +15,9 @@ class RoundTracker():
             print(m)
             return -1
     
+    def get_current_round(self):
+        return self.current_round
+    
     def next_round(self):
         try:
             self.current_round += 1
