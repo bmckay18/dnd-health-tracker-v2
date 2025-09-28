@@ -9,6 +9,8 @@ from inventory import Inventory
 from gold_service import GoldService
 from gold_ui import GoldUI
 from functions.extract_query import extract_query
+from roundtracker.round_tracker import RoundTracker
+from roundtracker.round_ui import RoundUI
 
 # Establish DB connection
 sql_conn = SQLService()
@@ -19,6 +21,11 @@ gold = GoldService()
 gold_interface = GoldUI()
 gold.add_cb(gold_interface.update_gold)
 gold_interface.add_logic_cb(gold.update_amount)
+
+# Initialise round tracker
+round_interface = RoundUI(None)
+round_tracker = RoundTracker(round_interface.update_label)
+round_interface.add_callback_functions(round_tracker.next_round, round_tracker.prev_round)
 
 # Define NPC class
 class NPC():
