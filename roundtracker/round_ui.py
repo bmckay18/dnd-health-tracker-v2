@@ -31,3 +31,6 @@ class RoundUI():
     def add_callback_functions(self, next_cb, prev_cb):
         self.next_round_cb = next_cb
         self.prev_round_cb = prev_cb
+    
+    def update_master(self, master):
+        self.master = master
