@@ -3,9 +3,10 @@ from sql_service import SQLService
 from functions.extract_query import extract_query
 
 class RoundTracker():
-    def __init__(self):
+    def __init__(self, ui_cb = lambda *args, **kwargs: None):
         self.conn = SQLService()
         self.current_round = self._retrieve_round()
+        self.ui_cb = ui_cb
     
     def _retrieve_round(self):
         query = extract_query("uspRetrieveRound")
@@ -15,8 +16,8 @@ class RoundTracker():
             print(m)
             return -1
     
-    def get_current_round(self):
-        return self.current_round
+    def _notify_ui_cb(self):
+        self.ui_cb(self.current_round)
     
     def next_round(self):
         try:
