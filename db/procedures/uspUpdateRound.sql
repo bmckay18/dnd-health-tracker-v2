@@ -1,2 +1,2 @@
 UPDATE tblRound
-SET colRound = ?;
+SET colRound = %d;
