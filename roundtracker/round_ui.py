@@ -16,7 +16,7 @@ class RoundUI():
 
     def place_widgets(self, set_row: int):
         # Create widgets
-        self.round_label = tk.Label(self.master)
+        self.round_label = tk.Label(self.master, text = 'Round: ')
         self.next_round_button = tk.Button(self.master, text = 'Next Round', command = self.next_round_cb())
         self.prev_round_button = tk.Button(self.master, text = 'Previous Round', command = self.prev_round_cb())
 
