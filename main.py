@@ -9,6 +9,8 @@ from inventory import Inventory
 from gold_service import GoldService
 from gold_ui import GoldUI
 from functions.extract_query import extract_query
+from roundtracker.round_tracker import RoundTracker
+from roundtracker.round_ui import RoundUI
 
 # Establish DB connection
 sql_conn = SQLService()
@@ -19,6 +21,9 @@ gold = GoldService()
 gold_interface = GoldUI()
 gold.add_cb(gold_interface.update_gold)
 gold_interface.add_logic_cb(gold.update_amount)
+
+# Initialise round tracker
+round_tracker = RoundTracker()
 
 # Define NPC class
 class NPC():
@@ -295,6 +300,12 @@ open_inventory_button = tk.Button(new_npc_frame, text = 'Open Inventory', comman
 # Initialise GoldUI
 gold_interface.update_master(new_npc_frame)
 
+# Initialise RoundUI
+round_interface = RoundUI(new_npc_frame)
+round_interface.add_callback_functions(round_tracker.next_round, round_tracker.prev_round,
+                                       round_tracker.reset_rounds)
+round_tracker.add_ui_cb(round_interface._update_label)
+
 # Pack label frames
 existing_npc_frame.pack(side='left', fill='both', expand=True)
 existing_npc_frame_2.pack(side='left', fill='both', expand=True)
@@ -318,9 +329,14 @@ mass_update_entry.grid(row = 7, column = 1)
 mass_delete_button.grid(row = 8, column = 1, pady = 5)
 save_button.grid(row=9, column = 1)
 load_button.grid(row=10, column = 1, pady = 5)
+
 open_inventory_button.grid(row = 11, column = 1)
+
 gold_interface.place_widgets(12)
 gold._notify_cb()
+
+round_interface.place_widgets(3)
+round_tracker._notify_ui_cb()
 
 # Run main loop
 root.mainloop()
