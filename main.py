@@ -302,7 +302,8 @@ gold_interface.update_master(new_npc_frame)
 
 # Initialise RoundUI
 round_interface = RoundUI(new_npc_frame)
-round_interface.add_callback_functions(round_tracker.next_round, round_tracker.prev_round)
+round_interface.add_callback_functions(round_tracker.next_round, round_tracker.prev_round,
+                                       round_tracker.reset_rounds)
 round_tracker.add_ui_cb(round_interface._update_label)
 
 # Pack label frames

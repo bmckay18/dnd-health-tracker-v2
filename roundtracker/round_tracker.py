@@ -5,7 +5,7 @@ from functions.extract_query import extract_query
 class RoundTracker():
     def __init__(self):
         self.conn = SQLService()
-        self.current_round = 0
+        self.current_round = 1
         self.ui_cb = lambda *args, **kwargs: None
         self._retrieve_round()
     
@@ -33,11 +33,16 @@ class RoundTracker():
     
     def prev_round(self):
         try:
-            self.current_round = max(self.current_round - 1, 0) # Ensures that the minimum round number is 0
+            self.current_round = max(self.current_round - 1, 1) # Ensures that the minimum round number is 0
             self._notify_ui_cb()
             self._update_round()
         except Exception as m:
             print(m)
+    
+    def reset_rounds(self, event = None):
+        self.current_round = 1
+        self._notify_ui_cb()
+        self._update_round()
     
     def _update_round(self):
         query = extract_query('uspUpdateRound') % self.current_round
