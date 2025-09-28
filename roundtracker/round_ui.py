@@ -2,7 +2,7 @@
 import tkinter as tk
 
 class RoundUI():
-    def __init__(self, master):
+    def __init__(self, master = None):
         self.master = master
         
         # Initialise tk widgets
