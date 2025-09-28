@@ -22,6 +22,13 @@ class RoundTracker():
         except Exception as m:
             print(m)
     
+    def prev_round(self):
+        try:
+            self.current_round = max(self.current_round - 1, 0) # Ensures that the minimum round number is 0
+            self._update_round()
+        except Exception as m:
+            print(m)
+    
     def _update_round(self):
         query = extract_query('uspUpdateRound') % self.current_round
         self.conn.execute_update(query)
