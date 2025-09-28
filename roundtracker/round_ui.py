@@ -27,3 +27,7 @@ class RoundUI():
     
     def update_label(self, current_round):
         self.round_label['text'] = f'Round: {current_round}'
+    
+    def add_callback_functions(self, next_cb, prev_cb):
+        self.next_round_cb = next_cb
+        self.prev_round_cb = prev_cb
