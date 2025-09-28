@@ -22,6 +22,7 @@ class RoundTracker():
     def next_round(self):
         try:
             self.current_round += 1
+            self._notify_ui_cb()
             self._update_round()
         except Exception as m:
             print(m)
@@ -29,6 +30,7 @@ class RoundTracker():
     def prev_round(self):
         try:
             self.current_round = max(self.current_round - 1, 0) # Ensures that the minimum round number is 0
+            self._notify_ui_cb()
             self._update_round()
         except Exception as m:
             print(m)
