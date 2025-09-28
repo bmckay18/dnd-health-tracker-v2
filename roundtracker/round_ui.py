@@ -27,9 +27,3 @@ class RoundUI():
     
     def update_label(self, current_round):
         self.round_label['text'] = f'Round: {current_round}'
-
-t = tk.Tk()
-a = RoundUI(t)
-a.place_widgets(1)
-a.update_label(5)
-t.mainloop()
