@@ -8,9 +8,8 @@ from inventory_window import InventoryWindow
 from inventory import Inventory
 from gold_service import GoldService
 from gold_ui import GoldUI
-from functions.extract_query import extract_query
-from roundtracker.round_tracker import RoundTracker
-from roundtracker.round_ui import RoundUI
+from functions import extract_query
+from roundtracker import RoundTracker, RoundUI
 
 # Establish DB connection
 sql_conn = SQLService()

@@ -1,6 +1,6 @@
 # Define libraries
 from sql_service import SQLService
-from functions.extract_query import extract_query
+from functions import extract_query
 
 class GoldService():
     def __init__(self):
