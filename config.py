@@ -10,7 +10,12 @@ USP_PATH = BASE_PATH / "db" / "procedures"
 env = os.getenv("APP_ENV","dev")
 if env == "prod":
     load_dotenv(".env.prod")
-else:
+elif env == "dev":
     load_dotenv(".env.dev")
+else:
+    raise RuntimeError("Environment not recognised.")
 
 DB_NAME = os.getenv("DATABASE_NAME")
+
+if not DB_NAME:
+    raise RuntimeError("DATABASE_NAME environment variable must be defined.")
