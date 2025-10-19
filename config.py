@@ -13,7 +13,7 @@ if env == "prod":
 elif env == "dev":
     load_dotenv(".env.dev")
 else:
-    raise RuntimeError("Environment not defined.")
+    raise RuntimeError("Environment not recognised.")
 
 DB_NAME = os.getenv("DATABASE_NAME")
 
