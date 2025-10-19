@@ -249,9 +249,9 @@ existing_npc_frame_2 = tk.Frame(root)
 new_npc_frame = tk.Frame(root)
 root.geometry("1000x580") # Originally 1000x600
 
-if env == "dev": # dev
+if env == "dev":
     root.title("NPC Health Tracker (DEV)")
-elif env == "prod": # prod
+elif env == "prod":
     root.title("NPC Health Tracker")
 else:
     root.title("Unknown Environment")
