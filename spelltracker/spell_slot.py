@@ -6,7 +6,7 @@ class SpellSlot():
         self.spell_slot_max = spell_slot_max
         self.spell_slot_current = spell_slot_current
     
-    def reset_spell_slots(self):
+    def reset_spell_slot(self):
         self.spell_slot_current = self.spell_slot_max
     
     def use_spell_slot(self):
