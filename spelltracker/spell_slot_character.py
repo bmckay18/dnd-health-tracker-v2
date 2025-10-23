@@ -1,11 +1,13 @@
 # Import libraries
 from spelltracker import SpellSlot
+from sql_service import SQLService
 
 class SpellSlotCharacter():
     def __init__(self, character_id, name):
         self.character_id = character_id
         self.name = name
         self.spell_slots = []
+        self.conn = SQLService()
     
     def add_spell_slot(self, spell_slot: SpellSlot):
         self.spell_slots.append(spell_slot)
@@ -26,3 +28,11 @@ class SpellSlotCharacter():
                 spell.regain_spell_slot()
                 break
     
+    def update_db(self):
+        base_query = 'UPDATE tblSpellAttributes'
+        for spell in self.spell_slots:
+            query = base_query
+            query += f' {spell.generate_db_string()}'
+            query += f' WHERE colSpellAttributesCharacterID = {self.character_id}'
+            query += f' AND colSpellAttributesSpellSlot = {spell.spell_slot_level}'
+            self.conn.execute_update(query)
