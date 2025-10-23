@@ -19,4 +19,13 @@ class SpellSlot():
         if self.spell_slot_current > self.spell_slot_max:
             self.spell_slot_current = self.spell_slot_max
     
-    
+    def set_max_spell_slots(self, max_spells):
+        if max_spells > 1:
+            self.spell_slot_max = max_spells
+        else:
+            self.spell_slot_max = 1        
+
+    def generate_db_string(self):
+        query = f'SET colSpellAttributesSpellSlotMax = {self.spell_slot_max}, '
+        query += f'colSpellAttributesSpellSlotCurrent = {self.spell_slot_current}'
+        return query
