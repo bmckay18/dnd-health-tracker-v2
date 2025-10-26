@@ -9,21 +9,21 @@ class SpellSlot():
     def reset_spell_slot(self):
         self.spell_slot_current = self.spell_slot_max
     
-    def use_spell_slot(self):
-        self.spell_slot_current -= 1
-        if self.spell_slot_current < 0:
-            self.spell_slot_current = 0
-    
-    def regain_spell_slot(self):
-        self.spell_slot_current += 1
-        if self.spell_slot_current > self.spell_slot_max:
+    def set_spell_slot(self, new_current):
+        if (new_current <= self.spell_slot_max) & (new_current >= 0):
+            self.spell_slot_current = new_current
+        elif new_current > self.spell_slot_max:
             self.spell_slot_current = self.spell_slot_max
+        else:
+            raise ValueError('Remaining spell slots cannot be negative')
     
     def set_max_spell_slots(self, max_spells):
-        if max_spells > 1:
+        if max_spells > 0:
             self.spell_slot_max = max_spells
         else:
-            self.spell_slot_max = 1        
+            self.spell_slot_max = 0
+
+        self.reset_spell_slot()        
 
     def generate_db_string(self):
         query = f'SET colSpellAttributesSpellSlotMax = {self.spell_slot_max}, '
