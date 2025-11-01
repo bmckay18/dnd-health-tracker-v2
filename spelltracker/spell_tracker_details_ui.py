@@ -1,7 +1,11 @@
 # Import libraries
 import tkinter as tk
 from spell_slot_character import SpellSlotCharacter
-from details_ui_spell_widgets import DetailsUISpellWidgets
+from details_ui_spell_widget import DetailsUISpellWidget
+
+### This is the middle details section.
+# It should receive the root from the window class
+# It needs to create instances of DetailsUISpellWidget for each spell slot of the character
 
 class SpellTrackerDetailsUI():
     def __init__(self, root, character_logic: SpellSlotCharacter):
@@ -11,7 +15,7 @@ class SpellTrackerDetailsUI():
     
     def create_spell_uis(self):
         for spell in self.character_logic.spell_slots:
-            self.spell_uis.append(DetailsUISpellWidgets(spell, self.root))
+            self.spell_uis.append(DetailsUISpellWidget(spell, self.root))
     
     def create_widgets(self):
         # Create widgets

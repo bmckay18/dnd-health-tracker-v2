@@ -2,7 +2,7 @@
 import tkinter as tk 
 from spell_slot import SpellSlot
 
-class DetailsUISpellWidgets():
+class DetailsUISpellWidget():
     def __init__(self, spell_instance: SpellSlot, root):
         self.root = root 
         self.spell_info = spell_instance
