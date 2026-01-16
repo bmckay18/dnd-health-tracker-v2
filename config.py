@@ -8,7 +8,7 @@ USP_PATH = BASE_PATH / "db" / "procedures"
 
 # Load environment variables from .env file
 load_dotenv(".env")
-env = os.getenv("APP_ENV", "dev")
+ENV = os.getenv("APP_ENV", "dev")
 DB_NAME = os.getenv("DATABASE_NAME", "npc_health.db")
 
 if not DB_NAME:

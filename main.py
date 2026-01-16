@@ -3,7 +3,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from sql_service import SQLService
-from config import env
+from config import ENV
 from inventory_window import InventoryWindow
 from inventory import Inventory
 from gold_service import GoldService
@@ -249,9 +249,9 @@ existing_npc_frame_2 = tk.Frame(root)
 new_npc_frame = tk.Frame(root)
 root.geometry("1000x580") # Originally 1000x600
 
-if env == "dev":
+if ENV == "dev":
     root.title("NPC Health Tracker (DEV)")
-elif env == "prod":
+elif ENV == "prod":
     root.title("NPC Health Tracker")
 else:
     root.title("Unknown Environment")
