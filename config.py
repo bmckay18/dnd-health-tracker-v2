@@ -7,15 +7,11 @@ BASE_PATH = Path(__file__).resolve().parent
 USP_PATH = BASE_PATH / "db" / "procedures"
 
 # Load environment variables from .env file
-env = os.getenv("APP_ENV","dev")
-if env == "prod":
-    load_dotenv(".env.prod")
-elif env == "dev":
-    load_dotenv(".env.dev")
-else:
-    raise RuntimeError("Environment not recognised.")
-
-DB_NAME = os.getenv("DATABASE_NAME")
+load_dotenv(".env")
+env = os.getenv("APP_ENV", "dev")
+DB_NAME = os.getenv("DATABASE_NAME", "npc_health.db")
 
 if not DB_NAME:
     raise RuntimeError("DATABASE_NAME environment variable must be defined.")
+elif DB_NAME == "npc_health.db":
+    print('WARNING: Using local database')
